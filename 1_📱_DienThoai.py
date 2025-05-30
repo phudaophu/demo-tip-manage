@@ -26,10 +26,6 @@ st.set_page_config(page_title="Glow Nails Spa",page_icon=icon, layout="centered"
 #tialogo = PIL.Image.open("tia-logo06.png")
 
 
-icon = PIL.Image.open("favicon.ico")
-st.set_page_config(page_title="Matdohanhkhach",page_icon=icon, layout="centered",initial_sidebar_state="collapsed")
-#tialogo = PIL.Image.open("tia-logo06.png")
-
 get_today=date.today()+ timedelta(days=0)
 today_day=get_today.strftime("%Y-%m-%d")
 
