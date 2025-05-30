@@ -18,13 +18,20 @@ from pathlib import Path
 import streamlit_authenticator as stauth
 import sqlite3
 from db_config import init_db, get_staff_list, add_tip, get_statistics_by_range, get_statistics_by_period
-
+import io
 
 
 icon = PIL.Image.open("favicon.ico")
 st.set_page_config(page_title="Glow Nails Spa",page_icon=icon, layout="centered",initial_sidebar_state="collapsed")
 #tialogo = PIL.Image.open("tia-logo06.png")
 
+
+icon = PIL.Image.open("favicon.ico")
+st.set_page_config(page_title="Matdohanhkhach",page_icon=icon, layout="centered",initial_sidebar_state="collapsed")
+#tialogo = PIL.Image.open("tia-logo06.png")
+
+get_today=date.today()+ timedelta(days=0)
+today_day=get_today.strftime("%Y-%m-%d")
 
 
 #-------------- Web Design - User Authentication --------------#
@@ -117,10 +124,18 @@ if st.button("Xem Thống Kê"):
     st.write(f"**Tổng Tiền Tip:** ${total_tip:.2f}")
     st.dataframe(df)
 
-    if st.button("Xuất Thống Kê Ra Excel"):
-        df.to_excel("tip_report.xlsx", index=False)
-        with open("tip_report.xlsx", "rb") as f:
-            st.download_button("Tải Excel", f, "tip_report.xlsx")
+    # Always show download button if df is available
+    if not df.empty:
+        output = io.BytesIO()
+        df.to_excel(output, index=False, engine='openpyxl')
+        output.seek(0)
+        st.download_button(
+            label="📥 Tải Excel",
+            data=output,
+            file_name=f"{today_day}_tip_report.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
 
 # --- Line Chart ---
 st.subheader("Biểu Đồ Tổng Tiền Tip")
