@@ -22,7 +22,7 @@ from db_config import init_db, get_staff_list, add_tip, get_statistics_by_range,
 
 
 icon = PIL.Image.open("favicon.ico")
-st.set_page_config(page_title="Matdohanhkhach",page_icon=icon, layout="centered",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Glow Nails Spa",page_icon=icon, layout="centered",initial_sidebar_state="collapsed")
 #tialogo = PIL.Image.open("tia-logo06.png")
 
 
